@@ -1,0 +1,7 @@
+viewport_size: [1296, 968]
+intrinsic_matrix: downloads/scenes/livingroom/intrinsic_color.txt
+view_matrix:  downloads/scenes/livingroom/poses_gl_te_1.txt
+pointcloud:  downloads/scenes/livingroom/pcd_te_1_vs_0.01_jit.ply
+
+net_ckpt: downloads/scenes/livingroom/01-19_22-44-19/UNet_stage_0_epoch_39_net.pth
+texture_ckpt: downloads/scenes/livingroom/01-19_22-44-19/PointTexture_stage_0_epoch_39_scene0024_00.pth

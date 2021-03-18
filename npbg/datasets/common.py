@@ -15,6 +15,10 @@ def load_image(path):
     assert img is not None, f'could not load {path}'
     return img[...,::-1].copy()
 
+def save_image(path, img):
+    img2 = img[..., ::-1].copy()
+    return cv2.imwrite(path, img2)
+
 
 def any2float(img):
     if isinstance(img, np.ndarray):

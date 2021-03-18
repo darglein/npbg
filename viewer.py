@@ -115,6 +115,7 @@ class MyApp():
 
         self.viewport_size = args.viewport if args.viewport else self.scene_data['config']['viewport_size']
         self.viewport_size = fix_viewport_size(self.viewport_size)
+        self.current_view_n = 0
         print('new viewport size ', self.viewport_size)
 
         # crop/resize viewport
@@ -349,6 +350,11 @@ class MyApp():
             self.print_info()
         elif symbol == glfw.GLFW_KEY_S:
             self.save_screen()
+        elif symbol == glfw.GLFW_KEY_A:
+            print("set view")
+            self.current_view_n = (self.current_view_n + 1) % len(self.scene_data['view_matrix'])
+            self.trackball._pose = self.scene_data['view_matrix'][self.current_view_n]
+            self.trackball._n_pose = self.trackball._pose
         else:
             print(symbol, modifiers)
 

@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def split_by_ratio(lists, train_ratio):
+def split_by_ratio(lists, train_ratio, random_shuffle):
     sz = [len(l) for l in lists]
     assert len(set(sz)) == 1, f'list sizes differ {sz}'
     
@@ -9,7 +9,13 @@ def split_by_ratio(lists, train_ratio):
     train_inds, val_inds = [], []
 
     train_n = int(sz[0] * train_ratio)
-    train_inds, val_inds = np.split(np.random.permutation(sz[0]), [train_n])
+
+    if random_shuffle:
+        seq = np.random.permutation(sz[0])
+    else:
+        seq = np.arange(sz[0])
+
+    train_inds, val_inds = np.split(seq, [train_n])
 
     # print(train_inds)
     # print( val_inds)

@@ -437,9 +437,11 @@ def import_model3d(model_path, uv_order=None, is_mesh=False):
 
         if 'ply_raw' in data.metadata:
             normals = np.zeros((n_pts, 3), dtype=np.float32)
-            normals[:, 0] = data.metadata['ply_raw']['vertex']['data']['nx']
-            normals[:, 1] = data.metadata['ply_raw']['vertex']['data']['ny']
-            normals[:, 2] = data.metadata['ply_raw']['vertex']['data']['nz']
+
+            # my exported point cloud stores the normal with one [1] dimension that is squeezed away here
+            normals[:, 0] = np.squeeze(data.metadata['ply_raw']['vertex']['data']['nx'])
+            normals[:, 1] = np.squeeze(data.metadata['ply_raw']['vertex']['data']['ny'])
+            normals[:, 2] = np.squeeze(data.metadata['ply_raw']['vertex']['data']['nz'])
             model['normals'] = normals
         elif hasattr(data, 'vertex_normals'):
             model['normals'] = data.vertex_normals

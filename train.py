@@ -197,6 +197,8 @@ def run_epoch(pipeline, phase, epoch, args, iter_cb=None):
             tt.tic() # data_time
 
     ds_list = pipeline.__dict__[f'ds_{phase}']
+
+
     sub_size = args.max_ds
 
     if phase == 'train':
@@ -212,7 +214,7 @@ def run_epoch(pipeline, phase, epoch, args, iter_cb=None):
 
         ds = ConcatDataset(ds_sub)
         if phase == 'train':
-            dl = DataLoader(ds, args.batch_size, num_workers=args.dataloader_workers, drop_last=True, pin_memory=False, shuffle=True, worker_init_fn=ds_init_fn)
+            dl = DataLoader(ds, args.batch_size, num_workers=args.dataloader_workers, drop_last=True, pin_memory=False, shuffle=args.shuffle_train, worker_init_fn=ds_init_fn)
         else:
             batch_size_val = args.batch_size if args.batch_size_val is None else args.batch_size_val
             dl = DataLoader(ds, batch_size_val, num_workers=args.dataloader_workers, drop_last=True, pin_memory=False, shuffle=False, worker_init_fn=ds_init_fn)
@@ -420,6 +422,7 @@ if __name__ == '__main__':
     parser.add('--eval_in_train', action='store_bool', default=False)
     parser.add('--eval_in_train_epoch', default=-1, type=int)
     parser.add('--eval_in_test',  action='store_bool', default=True)
+    parser.add('--shuffle_train',  action='store_bool', default=True)
     parser.add('--merge_loss', action='store_bool', default=True)
     parser.add('--net_ckpt', type=Path, default=None, help='neural network checkpoint')
     parser.add('--save_dir', type=Path, default='data/experiments')

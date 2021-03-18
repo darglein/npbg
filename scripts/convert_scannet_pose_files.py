@@ -27,6 +27,7 @@ if __name__ == '__main__':
     parser.add_argument('--input', type=str, required=True)
     args = parser.parse_args()
 
+    print("input dir: ", args.input)
     n_frames = len(os.listdir(join(args.input, 'color')))
 
     print("found ", n_frames, " frames")

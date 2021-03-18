@@ -69,9 +69,17 @@ def run(images, args):
 
     print("Aligning cameras...")
     chunk.alignCameras(adaptive_fitting=True)
+    
+    print("Saving the project...")
+    doc.save(path=os.path.join(args.in_dir, "project.psz"))
+    Metashape.app.update()
 
     chunk.buildDepthMaps(downscale=args.pc_downscale)
 
+    print("Saving the project...")
+    doc.save(path=os.path.join(args.in_dir, "project.psz"))
+    Metashape.app.update()
+    
     print ("Building a dense cloud...")
     chunk.buildDenseCloud()
 

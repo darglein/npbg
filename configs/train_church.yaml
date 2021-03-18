@@ -1,32 +1,34 @@
-paths_file: configs/paths_scannet24.yaml
+paths_file: configs/paths_church.yaml
 dataset_names: []
 
 batch_size: 4
 batch_size_val: 4
 eval_in_train: True
 
-input_format: colors_1d_p1, uv_1d_p1, uv_1d_p1_ds1, uv_1d_p1_ds2, uv_1d_p1_ds3, uv_1d_p1_ds4
+input_format: uv_1d_p1, uv_1d_p1_ds1, uv_1d_p1_ds2, uv_1d_p1_ds3, uv_1d_p1_ds4
 # use_mask: True
 
-epochs: 10
+epochs: 50
 save_freq: 5
 save_dir: data/logs
 simple_name: True
-dataloader_workers: 1
+dataloader_workers: 4
+shuffle_train: False
 
 net_ckpt: downloads/weights/01-09_07-29-34___scannet/UNet_stage_0_epoch_39_net.pth
 
 splitter_module: npbg.datasets.splitter.split_by_ratio
 splitter_args:
     train_ratio: 0.9
-    random_shuffle: false
+    random_shuffle: False
 
 train_dataset_args:
     keep_fov: False
-    random_zoom: [0.5, 2.0]
+    #random_zoom: [0.5, 2.0]
+    random_zoom: [1.0,1.0]
     random_shift: [-1., 1.]
     drop_points: 0.0
-    num_samples: 2000
+    #num_samples: 2000
 
 val_dataset_args:
     keep_fov: False

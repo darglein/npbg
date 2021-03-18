@@ -19,7 +19,7 @@ from npbg.gl.programs import NNScene
 from npbg.gl.utils import get_proj_matrix, load_scene, load_scene_data, setup_scene, FastRand
 from npbg.gl.dataset import parse_input_string
 
-from npbg.datasets.common import ToTensor, load_image, get_dataset_config, split_lists
+from npbg.datasets.common import ToTensor, load_image, save_image, get_dataset_config, split_lists
 from npbg.utils.perform import TicToc, AccumDict
 
 
@@ -49,6 +49,7 @@ default_target_transform = transforms.Compose([
 
 class MultiscaleRender:
     def __init__(self, scene, input_format, viewport_size, proj_matrix=None, out_buffer_location='numpy', gl_frame=False, supersampling=1, clear_color=None):
+        print("MultiscaleRender",input_format, viewport_size, out_buffer_location,gl_frame)
         self.scene = scene
         self.input_format = input_format
         self.proj_matrix = proj_matrix
@@ -251,6 +252,16 @@ class DynamicDataset:
         
         self.timing.add('render', tt.toc())
         tt.tic()
+
+        if False:
+            # Debug output
+            print("Render frame ", idx)
+            print("View\n", view_matrix)
+            print("K\n",K)
+            print("Proj\n",proj_matrix)
+            save_image("target.png", target)
+            save_image("icolor.png", input_['colors_1d_p1'] * 255)
+            exit(0)
         
         input_ = {k: self.input_transform(v) for k, v in input_.items()}
         target = self.target_transform(target)
@@ -372,6 +383,7 @@ def _get_splits(paths_file, ds_name, args):
     input_format = args.input_format
 
     scene_data = load_scene_data(scene_path)
+
 
     view_list = scene_data['view_matrix']
     camera_labels = scene_data['camera_labels']

@@ -365,6 +365,12 @@ class NNScene(Scene):
     def set_camera_view(self, m):
         self.program['m_view'] = inv(m).T
         self.program['cam_pos_world'] = m[:-1, -1]
+        if False:
+            # Debug output
+            print("set camera model: \n", m)
+            print("set camera view: \n", inv(m))
+            print("cam pos_world: \n", self.program['cam_pos_world'])
+
         self._update_normal_matrix()
 
     def set_model_view(self, m):

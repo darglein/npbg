@@ -72,7 +72,7 @@ def get_dataset_config(yml, dataset):
     if myhost in yml:
         data_root = yml[myhost]['data_root'] if 'data_root' in yml[myhost] else ''
     else:
-        data_root = '/'
+        data_root = ''
 
     ds = yml['datasets'][dataset]
 

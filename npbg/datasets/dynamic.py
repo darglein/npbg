@@ -379,6 +379,7 @@ def _get_splits(paths_file, ds_name, args):
     config = get_dataset_config(paths_file, ds_name)
 
     scene_path = config['scene_path']
+    print(scene_path)
     assert args.input_format, 'specify input format'
     input_format = args.input_format
 

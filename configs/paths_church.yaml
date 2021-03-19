@@ -1,7 +1,7 @@
 datasets:
     "church_anime":
-        scene_path: /home/dari/Projects/pointrendering2/Code/scenes/church/npbg_scene.yaml
-        target_path: /home/dari/Projects/pointrendering2/Code/scenes/church/color
+        scene_path: scenes/church_npbg_scene.yaml
+        target_path: ../../scenes/church/color
         target_name_func: "lambda i: f'{i}.jpg'"
         # mask_path: masks_undistorted
         # mask_name_func: "lambda i: f'{i}.png'"

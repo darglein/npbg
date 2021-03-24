@@ -253,7 +253,7 @@ class DynamicDataset:
         self.timing.add('render', tt.toc())
         tt.tic()
 
-        if False:
+        if 0:
             # Debug output
             print("Render frame ", idx)
             print("View\n", view_matrix)

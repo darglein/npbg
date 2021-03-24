@@ -50,6 +50,10 @@ class PointTexture(Texture):
             ids = inputs[:, 0] # BxHxW
 
         sh = ids.shape
+
+        assert(ids.dim() == 3)
+        print("texture forward", sh)
+        exit(0)
         n_pts = self.texture_.shape[-1]
 
         ind = ids.contiguous().view(-1).long()

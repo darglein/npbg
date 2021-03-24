@@ -277,7 +277,7 @@ class Trackball(object):
         self.set_camera_mat(cm)
             
     def yaw(self, step=1., cm=None):
-        a=np.deg2rad(step)
+        a=np.deg2rad(-step)
         # rot = np.array([
         #     [np.cos(a), np.sin(a), 0],
         #     [-np.sin(a), np.cos(a), 0],
@@ -298,7 +298,7 @@ class Trackball(object):
         return cm1
 
     def tilt(self, step=1.,  cm = None, cm_orig=None):
-        a=np.deg2rad(-step)
+        a=np.deg2rad(step)
 
         if cm is None:
             cm = self.get_camera_mat()

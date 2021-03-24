@@ -9,6 +9,17 @@ import os
 from npbg.models.conv import PartialConv2d
 
 
+def PrintTensorInfo(tensor):
+    """Loads an image from 'path' and converts it to a pytorch tensor
+    """
+    mi = tensor.min().item()
+    ma = tensor.max().item()
+    if tensor.dtype == torch.float32:
+        mean = tensor.mean().item()
+    else:
+        mean = '-'
+    print('Tensor', tensor.size(), tensor.dtype, tensor.device, 'Min/Max', mi,ma, 'Mean', mean)
+
 class View(nn.Module):
     def __init__(self):
         super(View, self).__init__()
@@ -18,7 +29,7 @@ class View(nn.Module):
 
         
 class VGGLoss(nn.Module):
-    def __init__(self, net='caffe', partialconv=False, optimized=False, save_dir='.cache/torch/models'):
+    def __init__(self, net='pytorch', partialconv=False, optimized=False, save_dir='.cache/torch/models'):
         super().__init__()
         
         self.partialconv = partialconv
@@ -28,6 +39,7 @@ class VGGLoss(nn.Module):
 
             self.register_buffer('mean_', torch.FloatTensor([0.485, 0.456, 0.406])[None, :, None, None])
             self.register_buffer('std_', torch.FloatTensor([0.229, 0.224, 0.225])[None, :, None, None])
+
 
         elif net == 'caffe':
             if not os.path.exists(join(save_dir, 'vgg_caffe_features.pth')):
@@ -54,8 +66,10 @@ class VGGLoss(nn.Module):
                 self.register_buffer('std_', torch.FloatTensor([1./255, 1./255, 1./255])[None, :, None, None])
         else:
             assert False
-                                   
+
+
         if self.partialconv:
+            assert(False)
             part_conv = PartialConv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
             part_conv.weight = vgg19[0].weight
             part_conv.bias = vgg19[0].bias
@@ -97,6 +111,8 @@ class VGGLoss(nn.Module):
 
         features_input = self.normalize_inputs(input)
         features_target = self.normalize_inputs(target)
+
+
         for i, layer in enumerate(self.vgg19):
             if isinstance(layer, PartialConv2d):
                 features_input  = layer(features_input, mask)
@@ -114,6 +130,8 @@ class VGGLoss(nn.Module):
 class VGGLossMix(nn.Module):
     def __init__(self, weight=0.5):
         super(VGGLossMix, self).__init__()
+        print("vgglossmix not used")
+        exit(0)
         self.l1 = VGGLoss()
         self.l2 = VGGLoss(net='caffe')
         self.weight = weight

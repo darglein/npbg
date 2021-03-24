@@ -157,6 +157,11 @@ class UNet(nn.Module):
         conv_block='partial'
     ):
         super().__init__()
+        print("unet", num_input_channels, num_output_channels, feature_scale, more_layers, upsample_mode, norm_layer, last_act,conv_block)
+        # exit(0)
+
+        assert(more_layers == 0)
+        # exit(0)
 
         self.feature_scale = feature_scale
         self.more_layers = more_layers
@@ -181,6 +186,9 @@ class UNet(nn.Module):
         filters = [64, 128, 256, 512, 1024]
         filters = [x // self.feature_scale for x in filters]
 
+
+        print("filters: " , filters)
+        print("num_input_channels: " , self.num_input_channels)
         # norm_layer = get_norm_layer(norm_layer)
 
         self.start = self.conv_block(self.num_input_channels[0], filters[0])
@@ -216,7 +224,6 @@ class UNet(nn.Module):
 
     def forward(self, *inputs, **kwargs):
         inputs = list(inputs)
-
         if isinstance(self.conv_block, PartialBlock):
             eps = 1e-9
             masks = [(x.sum(1) > eps).float() for x in inputs]

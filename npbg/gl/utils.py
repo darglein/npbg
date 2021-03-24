@@ -393,6 +393,8 @@ def get_normal_colors(normals):
 
 
 def import_model3d(model_path, uv_order=None, is_mesh=False):
+    print("import_model3d working dir:", os.getcwd())
+    print("import_model3d loading: ", model_path)
     data = trimesh.load(model_path)
 
     n_pts = data.vertices.shape[0]

@@ -1,7 +1,7 @@
 viewport_size: [1000, 800]
-intrinsic_matrix: ../../scenes/church/intrinsics/intrinsic_color.txt
-view_matrix:  ../../scenes/church/npbg_poses.txt
-pointcloud:  ../../scenes/church/point_cloud.ply
+intrinsic_matrix: /home/dari/Projects/pointrendering2/Code/scenes/church/intrinsics/intrinsic_color.txt
+view_matrix:  /home/dari/Projects/pointrendering2/Code/scenes/church/npbg_poses.txt
+pointcloud:  /home/dari/Projects/pointrendering2/Code/scenes/church/point_cloud.ply
 
 #net_ckpt: downloads/scenes/livingroom/01-19_22-44-19/UNet_stage_0_epoch_39_net.pth
 #texture_ckpt: downloads/scenes/livingroom/01-19_22-44-19/PointTexture_stage_0_epoch_39_scene0024_00.pth

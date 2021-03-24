@@ -5,17 +5,18 @@ batch_size: 4
 batch_size_val: 4
 eval_in_train: True
 
+# colors_1d_p1
 input_format: uv_1d_p1, uv_1d_p1_ds1, uv_1d_p1_ds2, uv_1d_p1_ds3, uv_1d_p1_ds4
 # use_mask: True
 
-epochs: 50
+epochs: 40
 save_freq: 5
 save_dir: data/logs
 simple_name: True
-dataloader_workers: 4
-shuffle_train: False
+dataloader_workers: 1
+shuffle_train: True
 
-net_ckpt: downloads/weights/01-09_07-29-34___scannet/UNet_stage_0_epoch_39_net.pth
+#net_ckpt: downloads/weights/01-09_07-29-34___scannet/UNet_stage_0_epoch_39_net.pth
 
 splitter_module: npbg.datasets.splitter.split_by_ratio
 splitter_args:
@@ -24,8 +25,8 @@ splitter_args:
 
 train_dataset_args:
     keep_fov: False
-    #random_zoom: [0.5, 2.0]
-    random_zoom: [1.0,1.0]
+#    random_zoom: [0.5, 2.0]
+    random_zoom: [0.9, 1.5]
     random_shift: [-1., 1.]
     drop_points: 0.0
     #num_samples: 2000

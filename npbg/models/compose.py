@@ -150,14 +150,20 @@ class NetAndTexture(nn.Module):
         texture_ids = inputs['id']
         del inputs['id']
 
+
         if torch.is_tensor(texture_ids):
             texture_ids = texture_ids.tolist()
         elif isinstance(texture_ids, int):
             texture_ids = [texture_ids]
 
+
+
         for i, tid in enumerate(texture_ids): # per item in batch
             input = {k: v[i][None] for k, v in inputs.items()}
             assert 'uv' in list(input)[0], 'first input must be uv'
+
+            print(texture_ids)
+            print(i, tid)
 
             texture = self._modules[str(tid)]
 

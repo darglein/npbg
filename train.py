@@ -80,7 +80,7 @@ def make_experiment_dir(base_dir, postfix='', use_time=True):
     time = datetime.datetime.now()
 
     if use_time:
-        postfix = time.strftime(f"%m-%d_%H-%M-%S___{postfix}")
+        postfix = time.strftime(f"%m-%d_%H-%M-%S{postfix}")
 
     save_dir = os.path.join(base_dir, postfix)
     os.makedirs(f'{save_dir}/checkpoints', exist_ok=True)
@@ -463,7 +463,7 @@ if __name__ == '__main__':
         if args.simple_name:
             args.ignore_changed_args += ['config', 'pipeline']
         exper_name = get_experiment_name(args, default_args, args.ignore_changed_args)
-        exper_dir = make_experiment_dir(args.save_dir, postfix=exper_name)
+        exper_dir = make_experiment_dir(args.save_dir)
 
         writer = SummaryWriter(log_dir=exper_dir, flush_secs=10)
         iter_cb = TrainIterCb(args, writer)

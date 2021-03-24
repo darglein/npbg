@@ -17,12 +17,14 @@ class PartialConv2d(nn.Conv2d):
 
         # whether the mask is multi-channel or not
         if 'multi_channel' in kwargs:
+            assert(0)
             self.multi_channel = kwargs['multi_channel']
             kwargs.pop('multi_channel')
         else:
             self.multi_channel = False
 
         if 'return_mask' in kwargs:
+            assert (0)
             self.return_mask = kwargs['return_mask']
             kwargs.pop('return_mask')
         else:

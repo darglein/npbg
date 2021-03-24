@@ -99,6 +99,8 @@ def fix_viewport_size(viewport_size, factor=16):
 
 class MyApp():
     def __init__(self, args):
+        # print("my app created")
+        # exit(0)
         with open(args.config) as f:
             _config = yaml.load(f)
             # support two types of configs

@@ -5,7 +5,7 @@ batch_size: 4
 batch_size_val: 4
 eval_in_train: True
 
-input_format: colors_1d_p1, uv_1d_p1, uv_1d_p1_ds1, uv_1d_p1_ds2, uv_1d_p1_ds3, uv_1d_p1_ds4
+input_format: uv_1d_p1, uv_1d_p1_ds1, uv_1d_p1_ds2, uv_1d_p1_ds3, uv_1d_p1_ds4
 # use_mask: True
 
 epochs: 10
@@ -26,7 +26,7 @@ train_dataset_args:
     random_zoom: [0.5, 2.0]
     random_shift: [-1., 1.]
     drop_points: 0.0
-    num_samples: 2000
+    #num_samples: 2000
 
 val_dataset_args:
     keep_fov: False

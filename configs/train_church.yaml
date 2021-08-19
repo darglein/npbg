@@ -9,14 +9,15 @@ eval_in_train: True
 input_format: uv_1d_p1, uv_1d_p1_ds1, uv_1d_p1_ds2, uv_1d_p1_ds3, uv_1d_p1_ds4
 # use_mask: True
 
-epochs: 40
+epochs: 5
 save_freq: 5
 save_dir: data/logs
 simple_name: True
 dataloader_workers: 1
-shuffle_train: True
-
+shuffle_train: False
+net_size: 4
 #net_ckpt: downloads/weights/01-09_07-29-34___scannet/UNet_stage_0_epoch_39_net.pth
+#net_cpkt: /home/dari/Projects/pointrendering2/Code/External/npbg/data/logs/03-30_09-50-10/checkpoints/UNet_stage_0_epoch_19_net.pth
 
 splitter_module: npbg.datasets.splitter.split_by_ratio
 splitter_args:
@@ -26,8 +27,10 @@ splitter_args:
 train_dataset_args:
     keep_fov: False
 #    random_zoom: [0.5, 2.0]
-    random_zoom: [0.9, 1.5]
-    random_shift: [-1., 1.]
+#    random_zoom: [0.9, 1.5]
+#    random_shift: [-1., 1.]
+    random_zoom: [1, 1]
+    random_shift: [-1, 1]
     drop_points: 0.0
     #num_samples: 2000
 

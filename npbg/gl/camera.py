@@ -5,6 +5,10 @@ import quaternion
 
 import trimesh.transformations as transformations
 
+
+USE_Z_UP = True
+
+
 def linePlaneCollision(planeNormal, planePoint, rayDirection, rayPoint, epsilon=1e-6):
  
     ndotu = planeNormal.dot(rayDirection)
@@ -277,17 +281,20 @@ class Trackball(object):
         self.set_camera_mat(cm)
             
     def yaw(self, step=1., cm=None):
-        a=np.deg2rad(-step)
-        # rot = np.array([
-        #     [np.cos(a), np.sin(a), 0],
-        #     [-np.sin(a), np.cos(a), 0],
-        #     [0, 0, 1]
-        # ])
-        rot = np.array([
-            [np.cos(a), 0, np.sin(a)],
-            [0, 1, 0],
-            [-np.sin(a), 0, np.cos(a)]
-        ])
+        if(USE_Z_UP):
+            a=np.deg2rad(step)
+            rot = np.array([
+                [np.cos(a), np.sin(a), 0],
+                [-np.sin(a), np.cos(a), 0],
+                [0, 0, 1]
+            ])
+        else:
+            a = np.deg2rad(-step)
+            rot = np.array([
+                [np.cos(a), 0, np.sin(a)],
+                [0, 1, 0],
+                [-np.sin(a), 0, np.cos(a)]
+            ])
         if cm is None:
             cm = self.get_camera_mat()
         

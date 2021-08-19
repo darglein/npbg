@@ -260,7 +260,7 @@ class DynamicDataset:
             print("K\n",K)
             print("Proj\n",proj_matrix)
             save_image("target.png", target)
-            save_image("icolor.png", input_['colors_1d_p1'] * 255)
+            save_image("icolor.png", input_['colors_1d_p1_ds1'] * 255)
             exit(0)
         
         input_ = {k: self.input_transform(v) for k, v in input_.items()}
@@ -290,12 +290,14 @@ class DynamicDataset:
         K = self.K.copy()
         sx = 1. if self.keep_fov else self.sx
         sy = 1. if self.keep_fov else self.sy
+        # print("_get_intrinsics",self.keep_fov, sx,sy)
         if self.random_zoom:
             z = rand_(*self.random_zoom)
             K[0, 0] *= z
             K[1, 1] *= z
             sx /= z
             sy /= z
+        # print("_get_intrinsics", K)
         if self.random_shift:
             if shift is None:
                 x, y = rand_(*self.random_shift, 2)
@@ -305,6 +307,8 @@ class DynamicDataset:
             h = self.image_size[1] * (1. - sy) / sy / 2.
             K[0, 2] += x * w
             K[1, 2] += y * h
+        # print("_get_intrinsics", K)
+        # exit(0)
             
         return K, get_proj_matrix(K, self.image_size, self.znear, self.zfar)
     

@@ -162,8 +162,8 @@ class NetAndTexture(nn.Module):
             input = {k: v[i][None] for k, v in inputs.items()}
             assert 'uv' in list(input)[0], 'first input must be uv'
 
-            print(texture_ids)
-            print(i, tid)
+            # print(texture_ids)
+            # print(i, tid)
 
             texture = self._modules[str(tid)]
 
@@ -197,7 +197,7 @@ class NetAndTexture(nn.Module):
                         input_multiscale[i] = (input_multiscale[i] + self.last_input[i]) / 2
                 self.last_input = list(input_multiscale)
 
-            out1 = self.net(*input_multiscale, **kwargs)
+            out1 = self.net(input_multiscale, **kwargs)
             out.append(out1)
 
         out = torch.cat(out, 0)

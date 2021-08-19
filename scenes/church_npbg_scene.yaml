@@ -1,4 +1,4 @@
-viewport_size: [1000, 800]
+viewport_size: [512, 512]
 intrinsic_matrix: /home/dari/Projects/pointrendering2/Code/scenes/church/intrinsics/intrinsic_color.txt
 view_matrix:  /home/dari/Projects/pointrendering2/Code/scenes/church/npbg_poses.txt
 pointcloud:  /home/dari/Projects/pointrendering2/Code/scenes/church/point_cloud.ply

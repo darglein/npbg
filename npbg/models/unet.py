@@ -222,8 +222,9 @@ class UNet(nn.Module):
         elif last_act == 'tanh':
             self.final = nn.Sequential(self.final, nn.Tanh())
 
-    def forward(self, *inputs, **kwargs):
+    def forward(self, inputs, **kwargs):
         inputs = list(inputs)
+
         if isinstance(self.conv_block, PartialBlock):
             eps = 1e-9
             masks = [(x.sum(1) > eps).float() for x in inputs]

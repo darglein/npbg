@@ -14,11 +14,12 @@ def PrintTensorInfo(tensor):
     """
     mi = tensor.min().item()
     ma = tensor.max().item()
-    if tensor.dtype == torch.float32:
+    sum = tensor.sum().item()
+    if tensor.dtype == torch.float32 or tensor.dtype == torch.float64:
         mean = tensor.mean().item()
     else:
         mean = '-'
-    print('Tensor', tensor.size(), tensor.dtype, tensor.device, 'Min/Max', mi,ma, 'Mean', mean)
+    print('Tensor', tensor.size(), tensor.dtype, tensor.device, 'Min/Max', mi,ma, 'Mean', mean, 'Sum', sum)
 
 class View(nn.Module):
     def __init__(self):
@@ -29,7 +30,7 @@ class View(nn.Module):
 
         
 class VGGLoss(nn.Module):
-    def __init__(self, net='pytorch', partialconv=False, optimized=False, save_dir='.cache/torch/models'):
+    def __init__(self, net='caffe', partialconv=False, optimized=False, save_dir='.cache/torch/models'):
         super().__init__()
         
         self.partialconv = partialconv

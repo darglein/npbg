@@ -16,7 +16,9 @@ class PointTexture(Texture):
         super().__init__()
 
         assert isinstance(size, int), 'size must be int'
-
+        assert init_method == 'zeros'
+        assert activation == 'none'
+        assert reg_weight == 0
         shape = 1, num_channels, size
 
         if checkpoint:
@@ -52,8 +54,6 @@ class PointTexture(Texture):
         sh = ids.shape
 
         assert(ids.dim() == 3)
-        print("texture forward", sh)
-        exit(0)
         n_pts = self.texture_.shape[-1]
 
         ind = ids.contiguous().view(-1).long()

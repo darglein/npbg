@@ -353,8 +353,8 @@ class MyApp():
         elif symbol == glfw.GLFW_KEY_S:
             self.save_screen()
         elif symbol == glfw.GLFW_KEY_A:
-            print("set view")
             self.current_view_n = (self.current_view_n + 1) % len(self.scene_data['view_matrix'])
+            print("set view ", self.current_view_n)
             self.trackball._pose = self.scene_data['view_matrix'][self.current_view_n]
             self.trackball._n_pose = self.trackball._pose
         else:
